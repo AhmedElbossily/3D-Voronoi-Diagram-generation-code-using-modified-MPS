@@ -16,7 +16,6 @@ double _x1=(1.0-_x0)/2.0;
 double _min_angle=90;
 double _max_angle=90;
 
-int odd (int a);
 double dist_two_points_3d(double x1,double y1,double z1,double x2,double y2,double z2);
 double random_number();
 void  mps_3d(double *points_x,double *points_y,double *points_z,int num_points,double r,int &num_itr,int initiation);
@@ -25,9 +24,9 @@ double max(double d_1,double d_2);
 void trim(float &x1 ,float &y1,float &z1,float &x2,float &y2,float &z2,int &boundary,int &draw_check);
 void draw_cells(double *draw_points, int num_draw_points,string &str);
 void one_cell_draw(tetgenio &out,int &draw_check,string str);
-void Voronoi_vertices_inside_unite_cube_extraction(tetgenio &out,int &draw_check,double &total_distance,
-												   double * draw_points,int * draw_check_array,int &num_draw_points,
-												float &x1,float&y1,float&z1,float&x2,float&y2,float&z2,int &draw_index,int &point_index);
+void V_unite_cube_extraction(tetgenio &out,int &draw_check,double &total_distance, double * draw_points,int * draw_check_array,
+							 int &num_draw_points,float &x1,float&y1,float&z1,float&x2,float&y2,float&z2,int &draw_index,
+							 int &point_index);
 void small_ligm_remove(tetgenio &out,int &draw_check,double beam_rad,int* ch_p_posi,int &p,int &num_small_lig);
 void tet_gen(int num_points,double *points_x,double*points_y,double*points_z,double &beam_rad,double denesity,
 			 double r_reg,double e,int initiation,double r,int &num_small_lig,int &num_draw_points,double * draw_points);
@@ -211,13 +210,6 @@ void main()
 	}
 
 	system("pause");
-}
-
-//function checks the number whether it odd or even
-int odd (int a)
-{
-	if ((a%2)!=0) return (1);
-	else return (0);
 }
 
 // return the distance between two points in 3d
@@ -558,7 +550,7 @@ void one_cell_draw(tetgenio &out,int &draw_check,string str)
 	Draw.DxfEnd(str);
 }
 
-void Voronoi_vertices_inside_unite_cube_extraction(tetgenio &out,int &draw_check,double &total_distance,double * draw_points,int * draw_check_array,int &num_draw_points,
+void V_unite_cube_extraction(tetgenio &out,int &draw_check,double &total_distance,double * draw_points,int * draw_check_array,int &num_draw_points,
 					 float &x1,float&y1,float&z1,float&x2,float&y2,float&z2,int &draw_index,int &point_index)
 {
 	total_distance=0;
@@ -735,7 +727,7 @@ void tet_gen(int num_points,double *points_x,double*points_y,double*points_z,dou
 
 		tetrahedralize(&A,&in,&out);
 
-		Voronoi_vertices_inside_unite_cube_extraction(out,draw_check,total_distance,draw_points,draw_check_array,num_draw_points,x1,y1,z1,x2,y2,z2, draw_index, point_index);
+		V_unite_cube_extraction(out,draw_check,total_distance,draw_points,draw_check_array,num_draw_points,x1,y1,z1,x2,y2,z2, draw_index, point_index);
 
 		beam_rad=sqrt((0.25*0.25*0.25*denesity)/(total_distance*_pi));
 
@@ -796,7 +788,7 @@ void tet_gen_honeycomb(int num_points,double *points_x,double*points_y,double*po
 
 	tetrahedralize(&A,&in,&out);
 
-	Voronoi_vertices_inside_unite_cube_extraction(out,draw_check,total_distance,draw_points,draw_check_array,num_draw_points,x1,y1,z1,x2,y2,z2, draw_index, point_index);
+	V_unite_cube_extraction(out,draw_check,total_distance,draw_points,draw_check_array,num_draw_points,x1,y1,z1,x2,y2,z2, draw_index, point_index);
 
 	beam_rad=sqrt((0.25*0.25*0.25*denesity)/(total_distance*_pi));
 
