@@ -6,7 +6,7 @@
 - These combinations generated 300 models.
 - This C++ code was developed to generate these models automatically.
 - This program encapsulates [TetGen library](http://wias-berlin.de/software/tetgen/) to get Voronoi cells. 
-
+- This code was used to generate virtual structure models, which [simulate](https://academy.3ds.com/en/projects/open-cell-aluminum-foam-compression-simulation-using-3-d-voronoi-diagram-model?page=5) the internal structure of foam material 
 # Acknowledgments
 - [Mohamed S. Ebeida](http://www.msebeida.net/)
 - [Muhammad A. Awad](https://sites.google.com/site/muhammadaawad/home)
